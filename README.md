@@ -24,4 +24,4 @@ Currently, Binja Sibyl uses a single thread so, as of now, it's slower than runn
 ## Props
 
 Shout out to Camille MOUGEY, the author of Sibyl.
-The underlying is pretty clever.
+The underlying idea is pretty clever.
