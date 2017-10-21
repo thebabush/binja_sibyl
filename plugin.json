@@ -1,0 +1,24 @@
+{
+	"plugin": {
+		"name": "Binja Sibyl",
+		"type": ["ui", "binaryview"],
+		"api": "python2",
+		"description": "Sibyl plugin for Binja",
+		"longdescription": "Sibyl is a tool to recognize function names based on their side effects",
+		"license": {
+			"name": "BSD 2-Clause License"
+		},
+		"dependencies": {
+			"pip": ["sibyl", "miasm"],
+			"apt": [],
+			"installers": [],
+			"other": []
+		},
+		"version": "0.1 alpha",
+		"author": "Paolo Montesel (github.com/kenoph)",
+		"minimumBinaryNinjaVersion": {
+			"dev": "1.0.dev-576",
+			"release": "9999"
+		}
+	}
+}
