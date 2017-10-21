@@ -1,4 +1,4 @@
-# binja_sibyl
+# Binja Sibyl
 
 A Miasm2 + binaryninja based function divination.
 
