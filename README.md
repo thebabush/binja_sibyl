@@ -19,9 +19,9 @@ For a detailed introduction see [Sybil's README](https://github.com/cea-sec/Siby
 
 ## Speed
 
-Currently, binja_sibyl uses a single thread so, as of now, it's slower than running Sibyl manually.
+Currently, Binja Sibyl uses a single thread so, as of now, it's slower than running Sibyl manually.
 
 ## Props
 
-Shout out to Camille MOUGEY, the author os Sibyl.
+Shout out to Camille MOUGEY, the author of Sibyl.
 The underlying is pretty clever.
