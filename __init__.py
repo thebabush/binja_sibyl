@@ -101,7 +101,7 @@ def rename_function(bv, addr, names, prefix='', comment=True):
         funk.set_comment(addr, 'Sibyl: {}'.format(', '.join(names)))
 
 
-def guess(bv, funks, prefix='s_', add_comment=True, timeout=1):
+def guess(bv, funks, tests, prefix='s_', add_comment=True, timeout=1):
     cc_map = CC_MAP[bv.arch.name]
     m_arch = ARCH_MAP[bv.arch.name]
 
@@ -114,7 +114,7 @@ def guess(bv, funks, prefix='s_', add_comment=True, timeout=1):
 
     # Create and start the analysis thread
     analysis = AnalysisThread(
-        sibyl.config.config.available_tests['string'],
+        tests,
         bv.file.filename,
         bv.start,
         m_arch,
@@ -127,13 +127,16 @@ def guess(bv, funks, prefix='s_', add_comment=True, timeout=1):
 
 
 def cmd_run(bv):
+    test_groups = sibyl.config.config.available_tests.keys()
+
     gui_label_options = LabelField('Options')
+    gui_tests = ChoiceField('Tests:', test_groups)
     gui_prefix = TextLineField('Function prefix:')
     gui_selector = ChoiceField('Function selector:', ('sub_.*', '.*'))
     gui_comment = ChoiceField('Add comment:', ('Yes', 'No'))
 
     ret = get_form_input(
-        (gui_label_options, gui_prefix, gui_selector, gui_comment),
+        (gui_label_options, gui_tests, gui_prefix, gui_selector, gui_comment),
         'Sibyl'
     )
 
@@ -142,6 +145,7 @@ def cmd_run(bv):
         return
 
     # Sanitize options
+    tests = sibyl.config.config.available_tests[test_groups[gui_tests.result]]
     rename_only_unknowns = gui_selector.choices[gui_selector.result] == 'sub_.*'
     add_comment = gui_comment.choices[gui_comment.result] == 'Yes'
     prefix = gui_prefix.result.strip()
@@ -152,7 +156,7 @@ def cmd_run(bv):
         funks = filter(lambda x: x.name.startswith('sub_'), funks)
 
     # Do the magic
-    guess(bv, funks, prefix=prefix, add_comment=add_comment, timeout=1)
+    guess(bv, funks, tests, prefix=prefix, add_comment=add_comment, timeout=1)
 
 
 def cmd_run_on_function(bv, funk):
